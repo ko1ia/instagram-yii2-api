@@ -1,0 +1,224 @@
+1. Авторизация пользователя
+Request:
+    POST /auth
+    body: {
+        'login',
+        'password'
+    }
+Response good:
+    status: true,
+    token: 'xxx',
+Response error:
+    status: false,
+    message: 'Invalid Authorization'
+---------------------------------------
+
+2. Регистрация пользователя
+Request:
+    POST /register
+    body: {
+        'login',
+        'password'
+    }
+Response good:
+    status: true,
+    token: 'Registration success',
+Response error:
+    status: false,
+    message: [
+        'login':'Login has be blank'
+    ]
+---------------------------------------
+
+3. Создание публикации
+Request:
+    POST /publications
+    body: {
+        'image',
+        'description'
+    }
+Response good:
+    status: true,
+    body: [
+        'id',
+        'author',
+        'photo',
+        'description'
+    ],
+Response error:
+    status: false,
+    message: [
+        'field': 'error'
+        ...
+    ]
+---------------------------------------
+
+4. Редактирование публикации
+Request:
+    PATCH /publications/<id>
+    body: {
+        'description'
+    }
+Response good:
+    status: true,
+    body: [
+        'id',
+        'author',
+        'photo',
+        'description'
+    ],
+Response error:
+    status: false,
+    message: [
+        'field': 'error'
+        ...
+    ]
+---------------------------------------
+
+5.Удаление публикации
+Request:
+    DELETE /publications/<id>
+Response good:
+    status: true,
+    message: 'Delete success',
+Response error:
+    status: false,
+    message: 'Publication not found',
+---------------------------------------
+
+6. Получение публикаций пользователя
+Request:
+    GET /publications/user/<id>
+Response good:
+    status: true,
+    posts: [
+       'id',
+       'author',
+       'photo',
+       'description'
+    ],
+    ...
+Response error:
+    status: false,
+    message: 'User not found',
+---------------------------------------
+
+7. Создание комментария
+Request:
+    POST /comments/<id>
+    body: [
+        'comment'
+    ]
+Response good:
+    status: true,
+    comment_id: id
+    publication_id: id
+Response error:
+    status: false,
+    message: 'Publication not found',
+---------------------------------------
+
+8. Редактирование комментария
+Request:
+    PATCH /comments/<id_comment>/publication/<id_publ>
+    body: [
+        'comment'
+    ]
+Response good:
+    status: true,
+    comment_id: id
+    publication_id: id
+Response error:
+    status: false,
+    message: 'Publication not found',
+---------------------------------------
+
+============= Подписки ================
+
+9. Подписаться на пользователя
+Request:
+    POST /users/subscribe/<id>
+Response good:
+    status: true,
+    message: 'Subscribe success'
+Response error:
+    status: false,
+    message: 'You are already subscribed',
+---------------------------------------
+
+10. Отписаться от пользователя
+Request:
+    DELETE /users/unsubscribe/<id>
+Response good:
+    status: true,
+    message: 'UnSubscribe success'
+Response error:
+    status: false,
+    message: 'Subscribe not found',
+---------------------------------------
+
+11. Список подписавшихся
+Request:
+    GET /users/sublist/<id>
+Response good:
+    status: true,
+    sub: [
+        'subscriber',
+        ...
+    ];
+Response error:
+    status: false,
+    message: 'Subscribers not found',
+---------------------------------------
+
+11. Список подписок
+Request:
+    GET /users/subtolist/<id>
+Response good:
+    status: true,
+    sub: [
+        'subscribing',
+        ...
+    ];
+Response error:
+    status: false,
+    message: 'List of signatories not found',
+---------------------------------------
+
+
+============= Лайки ================
+
+12. Поставить лайк
+Request:
+    GET /publications/like/<id>
+Response good:
+    status: true,
+    message: 'Put like success'
+Response error:
+    status: false,
+    message: 'You already put like',
+---------------------------------------
+
+13. Убрать лайк
+Request:
+    GET /publications/dislike/<id>
+Response good:
+    status: true,
+    message: 'Removed like success'
+Response error:
+    status: false,
+    message: 'Like not found',
+---------------------------------------
+
+14. Список лайков публикации
+Request:
+    GET /publications/likes/<id>
+Response good:
+    status: true,
+    likes: [
+        'login'
+    ]
+Response error:
+    status: false,
+    message: 'Likes not found',
+---------------------------------------
